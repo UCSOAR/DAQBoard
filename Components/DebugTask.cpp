@@ -132,6 +132,17 @@ void DebugTask::HandleDebugMessage(const char *msg)
     SOAR_PRINT("Debug: Triggering flash tests\n");
     FlashTask::Inst().TriggerTest();
   }
+  else if (strcmp(msg, "flash_print_lock_test") == 0)
+  {
+    SOAR_PRINT("Debug: SOAR_PRINT_FLASH lock test starting\n");
+    SOAR_PRINT_FLASH("SOAR_PRINT_FLASH wrote this line to UART and flash log sector\n");
+
+    const bool lockEnabled = cube_flash_log_lock_sector();
+    SOAR_PRINT("Debug: flash log sector lock %s\n", lockEnabled ? "enabled" : "FAILED");
+
+    const bool writeBlocked = cube_flash_log_test_locked_write();
+    SOAR_PRINT("Debug: locked write attempt %s (expected: blocked)\n", writeBlocked ? "blocked" : "NOT blocked");
+  }
   else if(strcmp(msg, "land") == 0){
 	  SOAR_PRINT("Rocket landed");
 	  PollingTask::Inst().SetFlightState(PollingTask::FlightState::Grounded);
