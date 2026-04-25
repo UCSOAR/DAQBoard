@@ -7,3 +7,6 @@
 	url = https://github.com/UCSOAR/PeripheralDriversSubmodule.git
 	branch = Jad/DAQ
 
+[submodule "AltitudePredictionFilter"]
+	path = AltitudePredictionFilter
+	url = https://github.com/flammabl3/AltitudePredictionFilter.git
