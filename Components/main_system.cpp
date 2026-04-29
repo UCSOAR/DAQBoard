@@ -20,6 +20,7 @@
 #include "FlashTask.hpp"
 #include "PollingTask.hpp"
 #include "main.h"
+#include "run_everest.hpp"
 
 /* Drivers ------------------------------------------------------------------*/
 namespace Driver {
@@ -41,6 +42,7 @@ void run_main() {
 	DebugTask::Inst().InitTask();
 	FlashTask::Inst().InitTask();
 	PollingTask::Inst().InitTask();
+    StartRunEverestTask();
 
 //		LSM6DSOTask::Inst().InitTask();
 //		IMUTask::Inst().InitTask();
