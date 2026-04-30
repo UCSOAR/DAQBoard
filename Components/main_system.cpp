@@ -22,6 +22,7 @@
 #include "main.h"
 #include "CANTask.hpp"
 #include "run_everest.hpp"
+#include "FilterTask.hpp"
 
 /* Drivers ------------------------------------------------------------------*/
 namespace Driver {
@@ -42,9 +43,9 @@ void run_main() {
 	CubeTask::Inst().InitTask();
 	DebugTask::Inst().InitTask();
 	FlashTask::Inst().InitTask();
-	PollingTask::Inst().InitTask();
-//	CANTask::Inst().InitTask();
-    StartRunEverestTask();
+//	PollingTask::Inst().InitTask();
+	FilterTask::Inst().InitTask();
+	StartRunEverestInjection();
 
 //		LSM6DSOTask::Inst().InitTask();
 //		IMUTask::Inst().InitTask();
