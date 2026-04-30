@@ -42,7 +42,7 @@ void run_main() {
 	CubeTask::Inst().InitTask();
 	DebugTask::Inst().InitTask();
 	FlashTask::Inst().InitTask();
-//	PollingTask::Inst().InitTask();
+	PollingTask::Inst().InitTask();
 	FilterTask::Inst().InitTask();
 	StartRunEverestInjection();
 
