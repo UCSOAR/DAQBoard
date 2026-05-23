@@ -66,9 +66,9 @@ constexpr uint8_t TASK_FLASH_TASK_PRIORITY = 3;         // Priority of the flash
 constexpr uint8_t TASK_FLASH_QUEUE_DEPTH_OBJS = 8;      // Size of the flash task queue
 constexpr uint16_t TASK_FLASH_STACK_DEPTH_WORDS = 1024; // Size of the flash task stack
 
-constexpr uint8_t TASK_GPS_PRIORITY = 2;            // Priority of the barometer task
-constexpr uint8_t TASK_GPS_QUEUE_DEPTH_OBJS = 10;        // Size of the barometer task queue
-constexpr uint16_t TASK_GPS_STACK_DEPTH_WORDS = 896;        // Size of the barometer task stack
+constexpr uint8_t TASK_DAQ_PRIORITY = 2;            // Priority of the barometer task
+constexpr uint8_t TASK_DAQ_QUEUE_DEPTH_OBJS = 10;        // Size of the barometer task queue
+constexpr uint16_t TASK_DAQ_STACK_DEPTH_WORDS = 896;        // Size of the barometer task stack
 
 #endif // CUBE_MAIN_SYSTEM_DEFINES_H
 

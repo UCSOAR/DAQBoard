@@ -14,6 +14,10 @@
 
 #include "stm32h7xx_hal.h"
 #include "FlashTask.hpp"
+#include "CANTask.hpp"
+#include "RPBLogs.hpp"
+
+#include "DAQLogs.hpp"
 
 // External Tasks (to send debug commands to)
 
@@ -166,9 +170,34 @@ void DebugTask::HandleDebugMessage(const char *msg)
 	  Command cmd(TASK_SPECIFIC_COMMAND, FLASH_CLEAR);
 	  FlashTask::Inst().GetEventQueue()->Send(cmd);
   }
-  else if(strcmp(msg, "gps") == 0){
-	  Command cmd(DATA_COMMAND, PollingTask::GPS_TEST);
-	  PollingTask::Inst().GetEventQueue()->Send(cmd);
+  else if(strcmp(msg, "airbrakes") == 0){
+	  SOAR_PRINT("Sending CAN");
+	  RPB_CAMERA_POWER_COMMAND cmd_can;
+	  cmd_can.camera = 1;
+	  cmd_can.enable = true;
+
+	  CANTask::Inst().SendCANMessageToDaughter(
+	  CAN_ROCKET_TARGET_RPB,
+	  RPB_LogIndexes::_RPB_CAMERA_POWER_COMMAND_LOGINDEX,
+	  (uint8_t*)&cmd_can
+	  );
+  }
+  else if(strcmp(msg, "shazam") == 0){
+  	  SOAR_PRINT("Sending CAN shazam");
+  	  DAQ_AIR_BRAKES_COMMAND cmd_can;
+  	  cmd_can.airBrakesGo = true;
+
+  	  CANTask::Inst().CANSendToMotherboardDirect(
+  	  DAQ_LogIndexes::_DAQ_AIR_BRAKES_COMMAND_LOGINDEX,
+  	  (uint8_t*)&cmd_can
+  	  );
+    }
+  else if(strcmp(msg, "gps_start") == 0){
+    while(1){
+      Command cmd(DATA_COMMAND, PollingTask::GPS_TEST);
+      PollingTask::Inst().GetEventQueue()->Send(cmd);
+      osDelay(1000);
+    }
   }
   else
   {

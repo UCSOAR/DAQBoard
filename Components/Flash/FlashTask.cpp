@@ -11,7 +11,16 @@
 #include "mx66xx_qspi.hpp"
 #include "SPIFlash.hpp"
 #include <cstring>
+
+
+#if __has_include("stm32h7xx_hal.h")
 #include "stm32h7xx_hal.h"
+#elif __has_include("stm32g4xx_hal.h")
+#include "stm32g4xx_hal.h"
+#else
+#error "No supported STM32 HAL header found"
+#endif
+
 #include "LoggingService.hpp"
 
 /* Constants ------------------------------------------------------------------*/
