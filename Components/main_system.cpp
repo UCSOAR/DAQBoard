@@ -41,8 +41,9 @@ void run_main() {
 	CubeTask::Inst().InitTask();
 	DebugTask::Inst().InitTask();
 	FlashTask::Inst().InitTask();
+    // PollingTask intializes sensors so no need for separate sensor tasks
 	PollingTask::Inst().InitTask();
-//	CANTask::Inst().InitTask();
+	CANTask::Inst().InitTask();
 
 //		LSM6DSOTask::Inst().InitTask();
 //		IMUTask::Inst().InitTask();
