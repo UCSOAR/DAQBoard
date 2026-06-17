@@ -148,6 +148,13 @@ void LoggingTask::HandleCommand(Command& cm){
 		    LoggingPriority::SECOND
 		);
 		err = log.LogData();
+
+		// Publish authoritative timestamp for this sample to DataBroker
+		{
+			TimeStampData ts{};
+			ts.timestamp_ms = timestamp;
+			DataBroker::Publish<TimeStampData>(&ts);
+		}
 		break;
 	}
 
@@ -175,6 +182,13 @@ void LoggingTask::HandleCommand(Command& cm){
 
 		LoggingService log = LoggingService(LoggingDest::FLASH_EXTERN, LoggingData::MAG, buf, 20, LoggingPriority::SECOND);
 		err = log.LogData();
+
+		// Publish authoritative timestamp for this sample to DataBroker
+		{
+			TimeStampData ts{};
+			ts.timestamp_ms = timestamp;
+			DataBroker::Publish<TimeStampData>(&ts);
+		}
 
 		break;
 	}
@@ -213,6 +227,13 @@ void LoggingTask::HandleCommand(Command& cm){
 		);
 
 		err = log.LogData();
+
+		// Publish authoritative timestamp for this sample to DataBroker
+		{
+			TimeStampData ts{};
+			ts.timestamp_ms = timestamp;
+			DataBroker::Publish<TimeStampData>(&ts);
+		}
 
 		break;
 	}
@@ -278,6 +299,13 @@ void LoggingTask::HandleCommand(Command& cm){
 			{
 				break;
 			}
+
+				// Publish authoritative timestamp for this sample to DataBroker (once per GPS message)
+				{
+						TimeStampData ts{};
+						ts.timestamp_ms = timestamp;
+						DataBroker::Publish<TimeStampData>(&ts);
+				}
 		}
 
 		break;
