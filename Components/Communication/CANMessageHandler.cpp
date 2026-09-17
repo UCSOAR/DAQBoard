@@ -13,7 +13,6 @@
 #include "CANTask.hpp"
 #include "LoggingService.hpp"
 #include "PollingTask.hpp"
-#include "CoreProto.h"
 
 
 /************************************

@@ -113,24 +113,7 @@ void DebugTask::HandleDebugMessage(const char *msg)
                TICKS_TO_MS(xTaskGetTickCount()));
   }
 
-  else if (strcmp(msg, "baro1") == 0)
-  {
-    SOAR_PRINT("Debug Baro07 read");
-    Command cmd(DATA_COMMAND, BARO07_SAMPLE_AND_LOG);
-    BaroTask07::Inst().GetEventQueue()->Send(cmd);
-  }
-  else if (strcmp(msg, "baro2") == 0)
-  {
-    SOAR_PRINT("Debug Baro11 read");
-    Command cmd(DATA_COMMAND, BARO11_SAMPLE_AND_LOG);
-    BaroTask11::Inst().GetEventQueue()->Send(cmd);
-  }
-  else if (strcmp(msg, "mag") == 0)
-  {
-    SOAR_PRINT("Debug mag read");
-    Command cmd(DATA_COMMAND, MMC5983MATask::MMC_CMD_START_READ);
-    MMC5983MATask::Inst().GetEventQueue()->Send(cmd);
-  }
+
   else if (strcmp(msg, "flash_test") == 0)
   {
     SOAR_PRINT("Debug: Triggering flash tests\n");
