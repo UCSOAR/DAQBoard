@@ -1,7 +1,7 @@
 [submodule "SoarOS"]
 	path = SoarOS
 	url = https://github.com/UCSOAR/SoarOperatingSystem.git
-	branch = Jad/DAQ
+	branch = master
 [submodule "PeripheralDriversSubmodule"]
 	path = PeripheralDriversSubmodule
 	url = https://github.com/UCSOAR/PeripheralDriversSubmodule.git
