@@ -30,6 +30,13 @@ namespace Driver {
  * @brief Main function interface, called inside main.cpp before os initialization takes place.
 */
 void run_main() {
+    // CMSIS_V2: main.c's osKernelInitialize() is skipped by the #if 0 around the generated
+    // scheduler code, and osKernelStart() fails unless the kernel has been initialized.
+    // CMSIS_V1 declares osKernelInitialize() but never implements it, so only call it on V2.
+#if defined(osCMSIS) && (osCMSIS >= 0x20000U)
+    osKernelInitialize();
+#endif
+
     // Init Tasks
     // Keep shared reset line deasserted before task bring-up.
     HAL_GPIO_WritePin(ResetPin_GPIO_Port, ResetPin_Pin, GPIO_PIN_SET);

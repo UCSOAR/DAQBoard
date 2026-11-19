@@ -1,0 +1,18 @@
+#!/bin/sh
+# Strips the duplicate Debug/Release configurations CubeMX appends to .cproject on code
+# generation, and keeps the CMSIS-RTOS include paths in sync with the wrapper in use.
+# See Tools/clean_cproject.py. Enable once per clone with:
+#   git config core.hooksPath .githooks
+
+FILES=".cproject .settings/language.settings.xml"
+
+# Only run when one of the project files is part of this commit
+git diff --cached --name-only -- $FILES | grep -q . || exit 0
+
+python3 -I Tools/clean_cproject.py || exit 1
+
+# Re-stage the cleaned versions of any project files that were staged
+for f in $FILES; do
+    git diff --cached --name-only -- "$f" | grep -q . && git add -- "$f"
+done
+exit 0
